@@ -10,4 +10,8 @@ class Status < ApplicationRecord
     def self.ransackable_associations(auth_object = nil)
         ["products"]
     end
+
+    def to_s
+        status_name
+    end
 end
