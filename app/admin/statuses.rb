@@ -15,4 +15,22 @@ ActiveAdmin.register Status do
   #   permitted
   # end
   
+  permit_params :status_name
+
+  index do
+    selectable_column
+    id_column
+    column :status_name
+    column "Products Count" do |status|
+      status.products.count
+    end
+    actions
+  end
+
+  form do |f|
+    f.inputs "Status Details" do
+      f.input :status_name
+    end
+    f.actions
+  end
 end
