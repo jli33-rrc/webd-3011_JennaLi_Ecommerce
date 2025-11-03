@@ -15,4 +15,22 @@ ActiveAdmin.register Category do
   #   permitted
   # end
   
+  permit_params :category_name
+
+  index do
+    selectable_column
+    id_column
+    column :category_name
+    column "Products Count" do |category|
+      category.products.count
+    end
+    actions
+  end
+
+  form do |f|
+    f.inputs "Category Details" do
+      f.input :category_name
+    end
+    f.actions
+  end
 end
