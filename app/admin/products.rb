@@ -15,6 +15,9 @@ ActiveAdmin.register Product do
   #   permitted
   # end
   
+  remove_filter :image_attachment
+  remove_filter :image_blob
+
   permit_params :product_name, :price, :description, :category_id, :status_id, :image
 
   index do
