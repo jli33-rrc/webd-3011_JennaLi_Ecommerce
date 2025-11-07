@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  root "pages#home"
   get "pages/home"
+  get '/:slug', to: 'pages#show', constraints: { slug: /(about|contact)/ }, as: :page
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -14,5 +17,4 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root "pages#home"
 end
