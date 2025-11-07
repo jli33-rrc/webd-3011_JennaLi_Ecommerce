@@ -5,10 +5,12 @@ class Page < ApplicationRecord
 
     validates :slug,
                presence: true,
-               uniqueness: true
+               uniqueness: true,
+               format: { with: /\A[a-z\s'-]+\z/, message: "can only contain lowercase letters" }
 
     validates :content,
-               presence: true
+               presence: true,
+               length: { minimum: 10, maximum: 1000 }
 
     def self.ransackable_attributes(auth_object = nil)
         ["id", "title", "slug", "content", "created_at", "updated_at"]
