@@ -15,4 +15,35 @@ ActiveAdmin.register Page do
   #   permitted
   # end
   
+  permit_params :title, :slug, :content
+
+  actions :all, except: [:destroy]
+
+  index do
+    selectable_column
+    id_column
+    column :title
+    column :slug
+    column :updated_at
+    actions
+  end
+
+  form do |f|
+    f.inputs "Page Details" do
+      f.input :title
+      f.input :slug, hint: "Use simple lowercase words like 'about' or 'contact'"
+      f.input :content, as: :text
+    end
+    f.actions
+  end
+
+  show do
+    attributes_table do
+      row :title
+      row :slug
+      row :content do |page|
+        raw page.content
+      end
+    end
+  end
 end
