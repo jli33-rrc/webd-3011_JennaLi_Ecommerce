@@ -14,8 +14,11 @@ ActiveAdmin.register Page do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  remove_filter :image_attachment
+  remove_filter :image_blob
   
-  permit_params :title, :slug, :content
+  permit_params :title, :slug, :content, :image
 
   actions :all, except: [:destroy]
 
@@ -25,6 +28,13 @@ ActiveAdmin.register Page do
     column :title
     column :slug
     column :updated_at
+    column "Image" do |page|
+      if page.image.attached?
+        image_tag page.image.variant(resize_to_limit: [50, 50])
+      else
+        "No image"
+      end
+    end
     actions
   end
 
@@ -33,6 +43,7 @@ ActiveAdmin.register Page do
       f.input :title
       f.input :slug, hint: "Use simple lowercase words like 'about' or 'contact'"
       f.input :content, as: :text
+      f.input :image, as: :file, hint: f.object.image.attached? ? image_tag(f.object.image.variant(resize_to_limit: [100, 100])) : content_tag(:span, "No image uploaded")
     end
     f.actions
   end
@@ -43,6 +54,13 @@ ActiveAdmin.register Page do
       row :slug
       row :content do |page|
         raw page.content
+      end
+      row :image do |page|
+        if page.image.attached?
+          image_tag page.image.variant(resize_to_limit: [300, 300])
+        else
+          "No image uploaded"
+        end
       end
     end
   end
