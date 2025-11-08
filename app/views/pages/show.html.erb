@@ -1,8 +1,21 @@
 <section class="section">
-  <div class="container">
-    <h1 class="title"><%= @page.title %></h1>
-    <div class="content">
-      <%= raw @page.content %>
+  <div class="container is-max-desktop">
+    <div class="fixed-grid has-1-cols">
+      <div class="grid">
+        <div class="cell">
+          <h1 class="title is-1 mb-4"><%= @page.title %></h1>
+        </div>
+        <div class="cell">
+          <%= raw @page.content %>
+        </div>
+        <% if @page.image.attached? %>
+          <div class="cell">
+            <figure class="image mt-4">
+              <%= image_tag @page.image.variant(resize_to_limit: [800, 600]) %>
+            </figure>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </section>
