@@ -1,4 +1,6 @@
 class Page < ApplicationRecord
+    has_one_attached :image
+    
     validates :title,
                presence: true,
                format: { with: /\A[a-zA-Z\s'-]+\z/, message: "can only contain letters, spaces, apostrophes, or hyphens" }
