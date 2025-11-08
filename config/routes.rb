@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   root "pages#home"
-
-  resources :pages, only: [:show], param: :slug, path: ""
-
-  get "/about",   to: "pages#show", defaults: { slug: "about" }, as: :about
-  get "/contact", to: "pages#show", defaults: { slug: "contact" }, as: :contact
+  
+  get '/:slug', to: 'pages#show', constraints: { slug: /(about|contact)/ }, as: :page
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
