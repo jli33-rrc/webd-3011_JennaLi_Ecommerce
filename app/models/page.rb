@@ -15,9 +15,10 @@ class Page < ApplicationRecord
                length: { minimum: 10, maximum: 1000 }
 
     validates :image_alt,
-               presence: true,
-               format: { with: /\A[a-zA-Z\s'-]+\z/, message: "can only contain letters, spaces, apostrophes, or hyphens" }
-
+               length: { maximum: 250 },
+               format: { with: /\A[\p{L}\p{N}\s'.,:;!?()&-]+\z/u, message: "can only contain letters, numbers, spaces, and basic punctuation" },
+               allow_blank: true
+    
     def self.ransackable_attributes(auth_object = nil)
         ["id", "title", "slug", "content", "created_at", "updated_at", "image_alt"]
     end
