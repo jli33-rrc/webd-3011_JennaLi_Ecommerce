@@ -18,7 +18,7 @@ ActiveAdmin.register Page do
   remove_filter :image_attachment
   remove_filter :image_blob
   
-  permit_params :title, :slug, :content, :image
+  permit_params :title, :slug, :content, :image, :image_alt
 
   actions :all, except: [:destroy]
 
@@ -35,7 +35,6 @@ ActiveAdmin.register Page do
         "No image"
       end
     end
-    column "Alt Text", :image_alt
     actions
   end
 
