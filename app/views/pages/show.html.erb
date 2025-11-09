@@ -1,5 +1,5 @@
 <section class="section has-background-light has-text-dark">
-  <div class="container mt-6">
+  <div class="container mt-6 mb-6">
     <div class="fixed-grid has-1-cols">
       <div class="grid">
         <div class="cell">
@@ -11,7 +11,7 @@
         <% if @page.image.attached? %>
           <div class="cell">
             <figure class="image mt-5">
-              <%= image_tag @page.image.variant(resize_to_limit: [800, 600]), alt: @page.image_alt.presence || @page.title.presence || "Page image" %>
+              <%= image_tag @page.image.variant(resize_to_limit: [2000, 1800]), alt: @page.image_alt.presence || @page.title.presence || "Page image" %>
             </figure>
           </div>
         <% end %>
