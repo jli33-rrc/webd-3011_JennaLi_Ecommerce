@@ -1,26 +1,33 @@
-<footer class="footer has-background-warning has-text-dark">
+<footer class="footer has-background-dark has-text-light">
     <div class="container mt-6">
         <div class="fixed-grid has-1-cols has-5-cols-desktop">
             <div class="grid">
                 <div class="cell mb-5 is-col-span-2-desktop">
-                    <h2 class="title is-4 has-text-dark is-italic">Parfum de Fleur</h2>
+                    <h2 class="title is-4 has-text-light is-italic">
+                        <%= link_to "Parfum de Fleur", root_path, class: "has-text-light" %>
+                    </h2>
                 </div>
                 <div class="cell mb-4">
-                    <h2 class="title is-6 has-text-dark">Navigation</h2>
+                    <h2 class="title is-6 has-text-light">Navigation</h2>
                     <ul>
-                        <li><%= link_to "About", page_path("about"), class: "has-text-dark" %></li>
-                        <li><%= link_to "Contact", page_path("contact"), class: "has-text-dark" %></li>
+                        <li><%= link_to "About", page_path("about"), class: "has-text-light" %></li>
+                        <li><%= link_to "Contact", page_path("contact"), class: "has-text-light" %></li>
+                        <% Category.all.each do |category| %>
+                            <li>
+                                <%= link_to category.category_name, category_path(category.category_name.parameterize), class: "has-text-light" %>
+                            </li>
+                        <% end %>
                     </ul>
                 </div>
                 <div class="cell mb-4">
-                    <h2 class="title is-6 has-text-dark">Connect</h2>
+                    <h2 class="title is-6 has-text-light">Connect</h2>
                     <ul>
                         <li>hello@parfumdefleur.com</li>
                         <li>+1 (204) 123-4567</li>
                     </ul>
                 </div>
                 <div class="cell">
-                    <h2 class="title is-6 has-text-dark">Location</h2>
+                    <h2 class="title is-6 has-text-light">Location</h2>
                     <ul>
                         <li>890 Main Street</li>
                         <li>Winnipeg, Manitoba, Canada</li>
