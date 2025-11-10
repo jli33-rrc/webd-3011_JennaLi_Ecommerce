@@ -8,31 +8,36 @@
         </figure>
     </div>
 </section>
-
+<section class="hero has-background-light is-medium">
+    <div class="hero-body has-text-centered is-italic ml-6 mr-6">
+        <h2 class="subtitle is-2 has-text-weight-medium has-text-dark">Indulge in the enchanting essence of nature with our luxurious flower perfumes – a captivating blend of delicate petals and timeless elegance.</h2>
+    </div>
+</section>
 <section class="section has-background-light has-text-dark">
-    <div class="container mt-6 mb-6">
+    <div class="container mb-6">
         <h2 class="title is-1 has-text-dark">All Fragrances</h2>
+        <div class="fixed-grid has-1-cols-mobile has-2-cols-tablet has-4-cols-desktop">
+            <div class="grid">
+                <% @products.each do |product| %>
+                    <div class="cell">
+                        <div class="card has-background-warning-light">
+                            <% if product.image.attached? %>
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <%= image_tag product.image, alt: product.product_name, class: "product-image" %>
+                                    </figure>
+                                </div>
+                            <% end %>
 
-        <div class="columns is-multiline">
-            <% @products.each do |product| %>
-                <div class="column is-one-quarter">
-                    <div class="card has-background-warning-light">
-                        <% if product.image.attached? %>
-                            <div class="card-image">
-                                <figure class="image">
-                                    <%= image_tag product.image, alt: product.product_name, class: "product-image" %>
-                                </figure>
+                            <div class="card-content has-text-dark">
+                                <p class="title is-5 has-text-dark mb-2"><%= product.product_name %></p>
+                                <p class="subtitle is-6 has-text-dark is-italic"><%= product.category.category_name %></p>
+                                <p class="subtitle is-6 has-text-dark has-text-weight-medium">$<%= product.price %></p>
                             </div>
-                        <% end %>
-
-                        <div class="card-content has-text-dark">
-                            <p class="title is-5 has-text-dark mb-2"><%= product.product_name %></p>
-                            <p class="subtitle is-6 has-text-dark is-italic"><%= product.category.category_name %></p>
-                            <p class="subtitle is-6 has-text-dark has-text-weight-medium">$<%= product.price %></p>
                         </div>
                     </div>
-                </div>
-            <% end %>
+                <% end %>
+            </div>
         </div>
     </div>
 </section>
