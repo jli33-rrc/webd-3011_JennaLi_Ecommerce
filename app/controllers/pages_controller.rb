@@ -2,7 +2,8 @@ class PagesController < ApplicationController
   layout "public"
   
   def home
-    @products = Product.includes(image_attachment: :blob).all
+    @categories = Category.all
+    @products = Product.includes(:category,image_attachment: :blob).all
   end
 
   def show
