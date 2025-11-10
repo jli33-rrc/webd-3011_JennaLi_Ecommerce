@@ -1,21 +1,40 @@
-<section class="hero has-background-warning-light is-medium">
+<section class="hero has-background-light is-medium">
     <div class="hero-body">
-        <div class="hero-content has-text-centered is-italic mb-6">
-            <h1 class="title is-1 has-text-dark">Experience the Allure of Nature's Fragrances</h1>
+        <div class="hero-content has-text-centered mb-6">
+            <h1 class="title is-1 has-text-dark is-italic">Experience the Allure of Nature's Fragrances</h1>
         </div>
         <figure class="image is-3by1">
             <img src="<%= asset_path('homepage.png') %>" alt="A bouquet of flowers with an orange background" class="hero-background-image">
         </figure>
     </div>
 </section>
-<section class="hero has-background-light is-medium">
-    <div class="hero-body has-text-centered is-italic ml-6 mr-6">
-        <h2 class="subtitle is-2 has-text-weight-medium has-text-dark">Indulge in the enchanting essence of nature with our luxurious flower perfumes – a captivating blend of delicate petals and timeless elegance.</h2>
+<section class="hero has-background-warning-light is-medium">
+    <div class="hero-body has-text-centered ml-6 mr-6">
+        <h2 class="subtitle is-2 has-text-dark is-italic has-text-weight-medium">Indulge in the enchanting essence of nature with our luxurious scents – a captivating blend of delicate petals and timeless elegance.</h2>
     </div>
 </section>
-<section class="section has-background-light has-text-dark">
+<section class="section has-background-light">
+    <div class="container mt-6 mb-3">
+        <h2 class="title is-1 has-text-dark has-text-centered">Shop by Category</h2>
+        <div class="fixed-grid has-1-cols-mobile has-2-cols-tablet has-4-cols-desktop">
+            <div class="grid">
+                <% @categories.each do |category| %>
+                    <div class="cell">
+                        <div class="card has-background-warning-light">
+                            <div class="card-content has-text-centered">
+                                <p class="title is-4 has-text-dark mb-2"><%= category.category_name %></p>
+                                <%= link_to "View Products", category_path(category.category_name.parameterize), class: "button is-dark is-rounded mt-2 mb-1" %>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section has-background-light">
     <div class="container mb-6">
-        <h2 class="title is-1 has-text-dark">All Fragrances</h2>
+        <h2 class="title is-1 has-text-dark">All Products</h2>
         <div class="fixed-grid has-1-cols-mobile has-2-cols-tablet has-4-cols-desktop">
             <div class="grid">
                 <% @products.each do |product| %>
@@ -28,8 +47,7 @@
                                     </figure>
                                 </div>
                             <% end %>
-
-                            <div class="card-content has-text-dark">
+                            <div class="card-content">
                                 <p class="title is-5 has-text-dark mb-2"><%= product.product_name %></p>
                                 <p class="subtitle is-6 has-text-dark is-italic"><%= product.category.category_name %></p>
                                 <p class="subtitle is-6 has-text-dark has-text-weight-medium">$<%= product.price %></p>
