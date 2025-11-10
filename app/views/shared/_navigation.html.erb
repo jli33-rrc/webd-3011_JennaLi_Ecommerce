@@ -1,4 +1,4 @@
-<nav class="navbar is-warning" aria-label="main navigation">
+<nav class="navbar is-light" aria-label="main navigation">
     <div class="navbar-brand">
         <%= link_to "Parfum de Fleur", root_path, class: "navbar-item has-text-weight-bold is-italic" %>
         <a role="button" class="navbar-burger has-text-dark" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
@@ -10,11 +10,20 @@
     </div>
     <div id="navbarMenu" class="navbar-menu">
         <div class="navbar-start">
-            <%= link_to "About", page_path("about"), class: "navbar-item" %>
-            <%= link_to "Contact", page_path("contact"), class: "navbar-item" %>
+            <%= link_to "About", page_path("about"), class: "navbar-item has-text-weight-medium" %>
+            <%= link_to "Contact", page_path("contact"), class: "navbar-item has-text-weight-medium" %>
         </div>
         <div class="navbar-end">
-        
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link has-text-weight-medium">SHOP</a>
+                <div class="navbar-dropdown is-right">
+                    <% Category.all.each do |category| %>
+                        <%= link_to category.category_name, category_path(category.category_name.parameterize), class: "navbar-item has-text-weight-medium" %>
+                    <% end %>
+                    <hr class="navbar-divider">
+                    <%= link_to "All Products", root_path, class: "navbar-item has-text-weight-medium" %>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
