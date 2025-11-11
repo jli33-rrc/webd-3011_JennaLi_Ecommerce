@@ -10,8 +10,8 @@
                     </div>
                 <% end %>
                 <div class="cell">
-                    <h2 class="subtitle is-5 has-text-dark is-italic mb-2"><%= @product.category.category_name %></h2>
-                    <h1 class="title is-1 has-text-dark mb-6"><%= @product.product_name %></h1>
+                    <%= link_to @product.category.category_name, category_path(@product.category.category_name.parameterize), class: "subtitle is-4 has-text-dark is-italic" %>
+                    <h1 class="title is-1 has-text-dark mt-2 mb-6"><%= @product.product_name %></h1>
                     <h2 class="subtitle is-4 has-text-dark mb-6">$<%= @product.price %></h2>
                     <p class="content has-text-dark is-uppercase has-text-weight-bold mb-1">Description</p>
                     <p class="content has-text-dark mb-3"><%= @product.description %></p>
