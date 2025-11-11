@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="has-text-centered mt-6 mb-6">
-      <%= link_to "🡠 Back to All Fragrances", root_path, class: "button is-dark is-rounded" %>
+      <%= link_to "🡠 Back to All Products", root_path, class: "button is-dark is-rounded" %>
     </div>
   </div>
 </section>
@@ -44,10 +44,10 @@
               <% if product.image.attached? %>
                 <div class="card-image">
                     <%= link_to product_path(product.category.category_name.parameterize, product.product_name.parameterize) do %>
-                    <figure class="image">
-                      <%= image_tag product.image, alt: product.product_name, class: "product-image" %>
-                    </figure>
-                  <% end %>
+                      <figure class="image">
+                        <%= image_tag product.image, alt: product.product_name, class: "product-image" %>
+                      </figure>
+                    <% end %>
                 </div>
               <% end %>
               <div class="card-content">
