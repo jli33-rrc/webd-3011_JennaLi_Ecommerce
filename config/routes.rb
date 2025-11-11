@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "products/show"
   root "pages#home"
   
   get '/:slug', to: 'pages#show', constraints: { slug: /(about|contact)/ }, as: :page
