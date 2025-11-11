@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   
   def home
     @categories = Category.all
-    @products = Product.includes(:category,image_attachment: :blob).all
+    @products = Product.includes(:category, image_attachment: :blob).all
   end
 
   def show
