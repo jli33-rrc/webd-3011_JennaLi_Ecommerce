@@ -1,9 +1,6 @@
-<section class="section has-background-light has-text-dark">
+<section class="section has-background-light">
   <div class="container mt-6 mb-6">
-    <h1 class="title is-1 has-text-dark has-text-centered mb-5">
-      <%= @category.category_name %>
-    </h1>
-
+    <h1 class="title is-1 has-text-dark"><%= @category.category_name %></h1>
     <div class="fixed-grid has-1-cols-mobile has-2-cols-tablet has-4-cols-desktop">
       <div class="grid">
         <% @products.each do |product| %>
@@ -16,23 +13,45 @@
                   </figure>
                 </div>
               <% end %>
-
-              <div class="card-content has-text-dark">
-                <p class="title is-5 has-text-dark mb-2">
-                  <%= product.product_name %>
-                </p>
-                <p class="subtitle is-6 has-text-dark has-text-weight-medium">
-                  $<%= product.price %>
-                </p>
+              <div class="card-content">
+                <p class="title is-5 has-text-dark mb-2"><%= product.product_name %></p>
+                <p class="subtitle is-6 has-text-dark is-italic"><%= product.category.category_name %></p>
+                <p class="subtitle is-6 has-text-dark has-text-weight-medium">$<%= product.price %></p>
               </div>
             </div>
           </div>
         <% end %>
       </div>
     </div>
-
-    <div class="has-text-centered mt-5">
-      <%= link_to "← Back to All Fragrances", root_path, class: "button is-dark is-rounded" %>
+    <div class="has-text-centered mt-6 mb-6">
+      <%= link_to "🡠 Back to All Fragrances", root_path, class: "button is-dark is-rounded" %>
+    </div>
+  </div>
+</section>
+<section class="section has-background-warning-light">
+  <div class="container mt-5 mb-6">
+    <h2 class="title is-2 has-text-dark has-text-centered is-italic">Featured Products</h2>
+    <div class="fixed-grid has-1-cols-mobile has-2-cols-tablet has-4-cols-desktop">
+      <div class="grid">
+        <% @featured_products.each do |product| %>
+          <div class="cell">
+            <div class="card has-background-light">
+              <% if product.image.attached? %>
+                <div class="card-image">
+                  <figure class="image">
+                    <%= image_tag product.image, alt: product.product_name, class: "product-image" %>
+                  </figure>
+                </div>
+              <% end %>
+              <div class="card-content">
+                <p class="title is-5 has-text-dark mb-2"><%= product.product_name %></p>
+                <p class="subtitle is-6 has-text-dark is-italic"><%= product.category.category_name %></p>
+                <p class="subtitle is-6 has-text-dark has-text-weight-medium">$<%= product.price %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </section>
