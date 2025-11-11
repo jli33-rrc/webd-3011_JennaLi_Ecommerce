@@ -1,2 +1,58 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<section class="section has-background-light">
+    <div class="container mt-6 mb-6">
+        <div class="fixed-grid has-1-cols-mobile has-1-cols-tablet has-2-cols-desktop">
+            <div class="grid">
+                <% if @product.image.attached? %>
+                    <div class="cell">
+                        <figure class="image">
+                            <%= image_tag @product.image, alt: @product.product_name, class: "product-detail-image" %>
+                        </figure>
+                    </div>
+                <% end %>
+                <div class="cell">
+                    <h2 class="subtitle is-5 has-text-dark is-italic mb-2"><%= @product.category.category_name %></h2>
+                    <h1 class="title is-1 has-text-dark mb-6"><%= @product.product_name %></h1>
+                    <h2 class="subtitle is-4 has-text-dark mb-6">$<%= @product.price %></h2>
+                    <p class="content has-text-dark is-uppercase has-text-weight-bold mb-1">Description</p>
+                    <p class="content has-text-dark mb-3"><%= @product.description %></p>
+                </div>
+            </div>
+        </div>
+        <div class="has-text-centered mt-6 mb-6">
+            <%= link_to "🡠 Back to Perfumes", category_path("perfumes"), class: "button is-dark is-rounded mr-4" %>
+            <%= link_to "View All Products 🡢", root_path, class: "button is-dark is-rounded is-outlined ml-4" %>
+        </div>
+    </div>
+</section>
+<section class="section has-background-warning-light">
+    <div class="container mt-5 mb-6">
+        <h2 class="title is-2 has-text-dark has-text-centered is-italic">Featured Products</h2>
+        <div class="fixed-grid has-1-cols-mobile has-2-cols-tablet has-4-cols-desktop">
+            <div class="grid">
+                <% @featured_products.each do |product| %>
+                    <div class="cell">
+                        <div class="card has-background-light">
+                            <% if product.image.attached? %>
+                                <div class="card-image">
+                                    <%= link_to product_path(product.category.category_name.parameterize, product.product_name.parameterize) do %>
+                                        <figure class="image">
+                                            <%= image_tag product.image, alt: product.product_name, class: "product-image" %>
+                                        </figure>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                            <div class="card-content">
+                                <%= link_to product.product_name, product_path(product.category.category_name.parameterize, product.product_name.parameterize), class: "title is-5 has-text-dark mb-2" %>
+                                <p class="subtitle is-6 is-italic">
+                                    <%= link_to product.category.category_name, category_path(product.category.category_name.parameterize), class: "has-text-dark" %>
+                                </p>
+                                <p class="subtitle is-6 has-text-dark has-text-weight-medium">$<%= product.price %></p>
+                                <%= link_to "View Product", product_path(product.category.category_name.parameterize, product.product_name.parameterize), class: "button is-dark is-rounded mt-1 mb-1 is-outlined" %>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</section>
