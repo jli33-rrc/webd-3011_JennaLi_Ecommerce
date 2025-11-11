@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get "products/show"
   root "pages#home"
   
   get '/:slug', to: 'pages#show', constraints: { slug: /(about|contact)/ }, as: :page
@@ -20,6 +19,5 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   get '/:category_name', to: 'categories#show', as: :category
-  
-  resources :products, only: [:show]
+  get '/:category_name/:product_name', to: 'products#show', as: :product
 end

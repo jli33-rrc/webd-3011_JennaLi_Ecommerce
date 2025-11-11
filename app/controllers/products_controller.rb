@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   layout "public"
 
   def show
-    @product = Product.find(params[:id])
+    @category = Category.find_by!("LOWER(REPLACE(category_name, ' ', '-')) = ?", params[:category_name].downcase)
+    @product = @category.products.find_by!("LOWER(REPLACE(product_name, ' ', '-')) = ?", params[:product_name].downcase)
   end
 end
