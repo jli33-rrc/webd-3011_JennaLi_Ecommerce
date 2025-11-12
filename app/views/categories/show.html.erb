@@ -28,6 +28,9 @@
         <% end %>
       </div>
     </div>
+    <div class="has-text-centered mt-6">
+      <%= paginate @products %>
+    </div>
     <div class="has-text-centered mt-6 mb-6">
       <%= link_to "🡠 Back to All Products", root_path, class: "button is-dark is-rounded" %>
     </div>
