@@ -493,6 +493,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  kaminari
   puma (>= 5.0)
   pundit
   rails (~> 8.0.4)
