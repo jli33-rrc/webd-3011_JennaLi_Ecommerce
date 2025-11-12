@@ -4,6 +4,8 @@ class PagesController < ApplicationController
   def home
     @categories = Category.all
     @products = Product.includes(:category, image_attachment: :blob).all
+                       .order(:id)
+                       .page(params[:page]).per(12)
   end
 
   def show
