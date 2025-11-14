@@ -10,19 +10,34 @@
     </div>
     <div id="navbarMenu" class="navbar-menu">
         <div class="navbar-start">
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link has-text-weight-medium">Shop</a>
+                <div class="navbar-dropdown has-background-dark has-text-light">
+                    <% Category.all.each do |category| %>
+                        <%= link_to category.category_name, category_path(category.category_name.parameterize), class: "navbar-item has-background-dark has-text-light has-text-weight-medium" %>
+                    <% end %>
+                    <hr class="navbar-divider has-background-light">
+                    <%= link_to "All Products", root_path, class: "navbar-item has-background-dark has-text-light has-text-weight-medium" %>
+                </div>
+            </div>
             <%= link_to "About", page_path("about"), class: "navbar-item has-text-weight-medium" %>
             <%= link_to "Contact", page_path("contact"), class: "navbar-item has-text-weight-medium" %>
         </div>
         <div class="navbar-end">
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link has-text-weight-medium">SHOP</a>
-                <div class="navbar-dropdown is-right">
-                    <% Category.all.each do |category| %>
-                        <%= link_to category.category_name, category_path(category.category_name.parameterize), class: "navbar-item has-text-weight-medium" %>
-                    <% end %>
-                    <hr class="navbar-divider">
-                    <%= link_to "All Products", root_path, class: "navbar-item has-text-weight-medium" %>
-                </div>
+            <div class="navbar-item">
+                <%= form_with url: search_products_path, method: :get, local: true do |f| %>
+                    <div class="field has-addons">
+                        <p class="control"><%= f.text_field :q, placeholder: "Search", class: "input is-rounded has-background-dark" %></p>
+                        <p class="control">
+                            <span class="select is-light">
+                                <%= f.select :category_id,
+                                    options_for_select([["All Categories", ""]] + Category.all.map { |c| [c.category_name, c.id] }),
+                                    {}, class: "select has-background-dark has-text-weight-medium" %>
+                            </span>
+                        </p>
+                        <p class="control"><%= f.submit "Search", class: "button is-dark is-rounded" %></p>
+                    </div>
+                <% end %>
             </div>
         </div>
     </div>
