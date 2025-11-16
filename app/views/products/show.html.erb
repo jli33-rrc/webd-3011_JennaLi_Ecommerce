@@ -2,6 +2,14 @@
     <div class="container mt-6 mb-6">
         <div class="fixed-grid has-1-cols-mobile has-1-cols-tablet has-2-cols-desktop">
             <div class="grid">
+                <div class="cell">
+                    <%= link_to @product.category.category_name, category_path(@product.category.category_name.parameterize), class: "subtitle is-4 has-text-dark is-italic" %>
+                    <h1 class="title is-1 has-text-dark mt-2 mb-6"><%= @product.product_name %></h1>
+                    <h2 class="subtitle is-4 has-text-dark mb-6">$<%= @product.price %></h2>
+                    <p class="content has-text-dark is-uppercase has-text-weight-bold mb-1">Description</p>
+                    <p class="content has-text-dark mb-3"><%= @product.description %></p>
+                    <%= button_to "🞣 Add to Cart", add_to_cart_path(@product.id), method: :post, class: "button is-dark is-rounded mt-6 mb-6" %>
+                </div>
                 <% if @product.image.attached? %>
                     <div class="cell">
                         <figure class="image">
@@ -9,14 +17,6 @@
                         </figure>
                     </div>
                 <% end %>
-                <div class="cell">
-                    <%= link_to @product.category.category_name, category_path(@product.category.category_name.parameterize), class: "subtitle is-4 has-text-dark is-italic" %>
-                    <h1 class="title is-1 has-text-dark mt-2 mb-6"><%= @product.product_name %></h1>
-                    <h2 class="subtitle is-4 has-text-dark mb-6">$<%= @product.price %></h2>
-                    <p class="content has-text-dark is-uppercase has-text-weight-bold mb-1">Description</p>
-                    <p class="content has-text-dark mb-3"><%= @product.description %></p>
-                    <%= button_to "🞣 Add to Cart", add_to_cart_path(@product.id), method: :post, class: "button is-dark is-rounded mt-6" %>
-                </div>
             </div>
         </div>
         <div class="has-text-centered mt-6 mb-6">
