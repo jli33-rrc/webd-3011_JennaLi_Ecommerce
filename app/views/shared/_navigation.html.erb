@@ -1,6 +1,6 @@
 <nav class="navbar is-light" aria-label="main navigation">
     <div class="navbar-brand">
-        <%= link_to "Parfum de Fleur", root_path, class: "navbar-item has-text-weight-bold is-italic" %>
+        <%= link_to "Parfum de Fleur", root_path, class: "navbar-item has-text-weight-bold is-italic pl-5" %>
         <a role="button" class="navbar-burger has-text-dark" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -25,24 +25,28 @@
         </div>
         <div class="navbar-end">
             <div class="navbar-item">
-                <%= form_with url: search_products_path, method: :get, local: true do |f| %>
-                    <div class="field has-addons">
-                        <p class="control"><%= f.text_field :q, placeholder: "Search", class: "input is-rounded has-background-dark" %></p>
-                        <p class="control">
-                            <span class="select is-light">
-                                <%= f.select :category_id,
-                                    options_for_select([["All Categories", ""]] + Category.all.map { |c| [c.category_name, c.id] }),
-                                    {}, class: "select has-background-dark has-text-weight-medium" %>
-                            </span>
-                        </p>
-                        <p class="control"><%= f.submit "Search", class: "button is-dark is-rounded" %></p>
-                    </div>
-                <% end %>
-                <%= link_to cart_path, class: "button is-dark is-rounded is-outlined" do %>🛒 Cart
-                    <% if session[:cart].present? && session[:cart].values.sum > 0 %>
-                        (<%= session[:cart].values.sum %>)
+                <div class="navbar-item">
+                    <%= form_with url: search_products_path, method: :get, local: true do |f| %>
+                        <div class="field has-addons">
+                            <p class="control"><%= f.text_field :q, placeholder: "Search", class: "input is-rounded has-background-dark" %></p>
+                            <p class="control">
+                                <span class="select is-light">
+                                    <%= f.select :category_id,
+                                        options_for_select([["All Categories", ""]] + Category.all.map { |c| [c.category_name, c.id] }),
+                                        {}, class: "select has-background-dark has-text-weight-medium" %>
+                                </span>
+                            </p>
+                            <p class="control"><%= f.submit "Search", class: "button is-dark is-rounded" %></p>
+                        </div>
                     <% end %>
-                <% end %>
+                </div>
+                <div class="navbar-item">
+                    <%= link_to cart_path, class: "button is-dark is-rounded is-outlined" do %>🛒 Cart
+                        <% if session[:cart].present? && session[:cart].values.sum > 0 %>
+                            (<%= session[:cart].values.sum %>)
+                        <% end %>
+                    <% end %>
+                </div>
             </div>
         </div>
     </div>
