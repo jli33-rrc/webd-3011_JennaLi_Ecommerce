@@ -19,6 +19,12 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   get "/products/search", to: "products#search", as: :search_products
+
+  get    "/cart",                 to: "cart#show",   as: :cart
+  post   "/cart/add/:id",         to: "cart#add",    as: :add_to_cart
+  patch  "/cart/update/:id",       to: "cart#update", as: :update_cart_item
+  delete "/cart/remove/:id",       to: "cart#remove", as: :remove_cart_item
+
   get '/:category_name', to: 'categories#show', as: :category
   get '/:category_name/:product_name', to: 'products#show', as: :product
 end
