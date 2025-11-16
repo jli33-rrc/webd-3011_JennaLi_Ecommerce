@@ -38,6 +38,11 @@
                         <p class="control"><%= f.submit "Search", class: "button is-dark is-rounded" %></p>
                     </div>
                 <% end %>
+                <%= link_to cart_path, class: "button is-dark is-rounded is-outlined" do %>🛒 Cart
+                    <% if session[:cart].present? && session[:cart].values.sum > 0 %>
+                        (<%= session[:cart].values.sum %>)
+                    <% end %>
+                <% end %>
             </div>
         </div>
     </div>
