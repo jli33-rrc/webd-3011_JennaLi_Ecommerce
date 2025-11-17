@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="has-text-centered mt-6 mb-6">
-            <%= link_to "🡠 Back to Perfumes", category_path("perfumes"), class: "button is-dark is-rounded mr-4" %>
+            <%= link_to "🡠 Back to #{@product.category.category_name}", category_path(@product.category.category_name.parameterize), class: "button is-dark is-rounded mr-4" %>
             <%= link_to "View All Products 🡢", root_path, class: "button is-dark is-rounded is-outlined ml-4" %>
         </div>
     </div>
