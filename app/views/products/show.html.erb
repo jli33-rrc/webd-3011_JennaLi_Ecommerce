@@ -8,7 +8,10 @@
                     <h2 class="subtitle is-4 has-text-dark mb-6">$<%= @product.price %></h2>
                     <p class="content has-text-dark is-uppercase has-text-weight-bold mb-1">Description</p>
                     <p class="content has-text-dark mb-3"><%= @product.description %></p>
-                    <%= button_to "🞣 Add to Cart", add_to_cart_path(@product.id), method: :post, class: "button is-dark is-rounded mt-6 mb-6" %>
+                    <form action="<%= add_to_cart_path(@product.id) %>" method="post" accept-charset="UTF-8">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                        <button type="submit" class="button is-dark is-rounded mt-6 mb-6">🞣 Add to Cart</button>
+                    </form>
                 </div>
                 <% if @product.image.attached? %>
                     <div class="cell">
