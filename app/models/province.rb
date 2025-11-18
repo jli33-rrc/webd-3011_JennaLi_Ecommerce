@@ -17,6 +17,6 @@ class Province < ApplicationRecord
     end
 
     def to_s
-        product_name
+        province_name
     end
 end
