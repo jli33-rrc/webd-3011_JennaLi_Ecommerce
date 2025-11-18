@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_18_162332) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_18_171228) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -115,14 +115,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162332) do
   end
 
   create_table "purchase_products", force: :cascade do |t|
-    t.integer "order_id", null: false
+    t.integer "purchase_id", null: false
     t.integer "product_id", null: false
     t.decimal "price"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_purchase_products_on_order_id"
     t.index ["product_id"], name: "index_purchase_products_on_product_id"
+    t.index ["purchase_id"], name: "index_purchase_products_on_purchase_id"
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -148,7 +148,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162332) do
   add_foreign_key "customers", "provinces"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "statuses"
-  add_foreign_key "purchase_products", "orders"
   add_foreign_key "purchase_products", "products"
+  add_foreign_key "purchase_products", "purchases"
   add_foreign_key "purchases", "customers"
 end

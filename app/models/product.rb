@@ -4,6 +4,9 @@ class Product < ApplicationRecord
 
   has_one_attached :image
 
+  has_many :purchase_products
+  has_many :purchases, through: :purchase_products
+
   validates :product_name,
              presence: true,
              uniqueness: true,
