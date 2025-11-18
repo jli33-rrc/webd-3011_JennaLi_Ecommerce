@@ -1,7 +1,7 @@
 class Province < ApplicationRecord
     has_many :customers
 
-    validates :name,
+    validates :province_name,
                presence: true,
                uniqueness: true,
                format: { with: /\A[a-zA-Z\s'-]+\z/, message: "can only contain letters, spaces, apostrophes, or hyphens" }
@@ -9,7 +9,7 @@ class Province < ApplicationRecord
     validates :gst, :pst, :hst, numericality: { greater_than_or_equal_to: 0 }
 
     def self.ransackable_attributes(auth_object = nil)
-        ["id", "name", "gst", "pst", "hst", "created_at", "updated_at"]
+        ["id", "province_name", "gst", "pst", "hst", "created_at", "updated_at"]
     end
 
     def self.ransackable_associations(auth_object = nil)
@@ -17,6 +17,6 @@ class Province < ApplicationRecord
     end
 
     def to_s
-        name
+        product_name
     end
 end

@@ -15,12 +15,12 @@ ActiveAdmin.register Province do
   #   permitted
   # end
   
-  permit_params :name, :gst, :pst, :hst
+  permit_params :province_name, :gst, :pst, :hst
 
   index do
     selectable_column
     id_column
-    column :name
+    column :province_name
     column :gst
     column :pst
     column :hst
@@ -30,7 +30,7 @@ ActiveAdmin.register Province do
   show do
     attributes_table do
       row :id
-      row :name
+      row :province_name
       row :gst
       row :pst
       row :hst
@@ -42,7 +42,7 @@ ActiveAdmin.register Province do
   form do |f|
     f.semantic_errors
     f.inputs "Province Tax Rates" do
-      f.input :name
+      f.input :province_name
       f.input :gst
       f.input :pst
       f.input :hst

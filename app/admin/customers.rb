@@ -76,7 +76,7 @@ ActiveAdmin.register Customer do
       f.input :province_id,
               label: "Province",
               as: :select,
-              collection: Province.order(:name).map { |p| [p.name, p.id] }
+              collection: Province.order(:province_name).map { |p| [p.province_name, p.id] }
     end
     f.actions
   end
