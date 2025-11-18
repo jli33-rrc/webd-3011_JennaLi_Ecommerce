@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_09_152341) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_18_162332) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -71,6 +71,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_09_152341) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "address"
+    t.string "city"
+    t.string "postal_code"
+    t.integer "province_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["province_id"], name: "index_customers_on_province_id"
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string "title"
     t.string "slug"
@@ -92,6 +105,38 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_09_152341) do
     t.index ["status_id"], name: "index_products_on_status_id"
   end
 
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.decimal "gst"
+    t.decimal "pst"
+    t.decimal "hst"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "purchase_products", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "product_id", null: false
+    t.decimal "price"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_purchase_products_on_order_id"
+    t.index ["product_id"], name: "index_purchase_products_on_product_id"
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.decimal "subtotal"
+    t.decimal "gst"
+    t.decimal "pst"
+    t.decimal "hst"
+    t.decimal "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_purchases_on_customer_id"
+  end
+
   create_table "statuses", force: :cascade do |t|
     t.string "status_name"
     t.datetime "created_at", null: false
@@ -100,6 +145,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_09_152341) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "customers", "provinces"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "statuses"
+  add_foreign_key "purchase_products", "orders"
+  add_foreign_key "purchase_products", "products"
+  add_foreign_key "purchases", "customers"
 end
