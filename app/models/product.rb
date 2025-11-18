@@ -38,4 +38,8 @@ class Product < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["category", "status"]
   end
+
+  def to_s
+    product_name
+  end
 end

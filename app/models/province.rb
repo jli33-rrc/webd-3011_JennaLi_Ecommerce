@@ -15,4 +15,8 @@ class Province < ApplicationRecord
     def self.ransackable_associations(auth_object = nil)
         ["customers"]
     end
+
+    def to_s
+        name
+    end
 end

@@ -35,4 +35,8 @@ class Customer < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["province"]
   end
+
+  def to_s
+    id
+  end
 end

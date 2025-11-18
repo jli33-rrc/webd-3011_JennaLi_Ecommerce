@@ -4,6 +4,8 @@ class Purchase < ApplicationRecord
   has_many :purchase_products, dependent: :destroy
   has_many :products, through: :purchase_products
 
+  accepts_nested_attributes_for :purchase_products, allow_destroy: true
+
   validates :subtotal, :gst, :pst, :hst, :total, numericality: { greater_than_or_equal_to: 0 }
 
   validates :customer_id,
@@ -16,5 +18,9 @@ class Purchase < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     ["customer"]
+  end
+
+  def to_s
+    id
   end
 end

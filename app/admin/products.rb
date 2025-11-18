@@ -20,6 +20,11 @@ ActiveAdmin.register Product do
 
   permit_params :product_name, :price, :description, :category_id, :status_id, :image
 
+  filter :product_name
+  filter :price
+  filter :category
+  filter :status
+
   index do
     selectable_column
     id_column
