@@ -5,77 +5,83 @@
                 <div class="cell">
                     <h1 class="title is-1 has-text-dark mb-4">Shopping Cart</h1>
                 </div>
-                <div class="cell table-container">
-                    <% if session[:cart].empty? %>
+                <% if session[:cart].empty? %>
+                    <div class="cell">
                         <p class="has-text-dark mb-6">Your cart is empty.</p>
                         <%= link_to "View All Products 🡢", root_path, class: "button is-dark is-rounded is-outlined" %>
-                    <% else %>
-                    <table class="table is-fullwidth has-background-light">
-                        <thead>
-                            <tr>
-                                <th class="has-text-dark is-uppercase">Image</th>
-                                <th class="has-text-dark is-uppercase">Product</th>
-                                <th class="has-text-dark is-uppercase">Category</th>
-                                <th class="has-text-dark is-uppercase">Price</th>
-                                <th class="has-text-dark is-uppercase">Quantity</th>
-                                <th class="has-text-dark is-uppercase">Total</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% @cart_items.each do |product| %>
-                                <% qty = session[:cart][product.id.to_s] %>
+                    </div>
+                <% else %>
+                    <div class="cell table-container">
+                        <table class="table is-fullwidth has-background-light">
+                            <thead>
                                 <tr>
-                                    <td style="width:125px">
-                                        <% if product.image.attached? %>
-                                            <%= image_tag product.image.variant(resize_to_limit: [125,125]), alt: product.product_name %>
-                                        <% end %>
-                                    </td>
-                                    <td class="has-text-dark">
-                                        <%= link_to product.product_name, product_path(product.category.category_name.parameterize, product.product_name.parameterize), class: "has-text-dark" %>
-                                    </td>
-                                    <td class="has-text-dark">
-                                        <%= link_to product.category.category_name, category_path(product.category.category_name.parameterize), class: "has-text-dark" %>
-                                    </td>
-                                    <td class="has-text-dark">$<%= product.price %></td>
-                                    <td>
-                                        <form action="<%= update_cart_item_path(product.id) %>" method="post" accept-charset="UTF-8">
-                                            <input type="hidden" name="_method" value="patch">
-                                            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-                                            <input type="number"
-                                                name="quantity"
-                                                id="quantity_<%= product.id %>"
-                                                value="<%= qty %>"
-                                                min="1"
-                                                class="input has-background-light has-text-dark mb-2"
-                                                style="width:85px">
-                                            <input type="submit"
-                                                value="Update"
-                                                class="button is-info is-rounded ml-2">
-                                        </form>
-                                    </td>
-                                    <td class="has-text-dark">$<%= product.price * qty %></td>
-                                    <td class="has-text-right">
-                                        <form action="<%= remove_cart_item_path(product.id) %>" method="post" accept-charset="UTF-8">
-                                            <input type="hidden" name="_method" value="delete">
-                                            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-                                            <input type="submit"
-                                                value="🞪 Remove"
-                                                class="button is-danger is-rounded">
-                                        </form>
-                                    </td>
+                                    <th class="has-text-dark is-uppercase">Image</th>
+                                    <th class="has-text-dark is-uppercase">Product</th>
+                                    <th class="has-text-dark is-uppercase">Category</th>
+                                    <th class="has-text-dark is-uppercase">Price</th>
+                                    <th class="has-text-dark is-uppercase">Quantity</th>
+                                    <th class="has-text-dark is-uppercase">Total</th>
+                                    <th></th>
                                 </tr>
-                            <% end %>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="cell">
-                    <% subtotal = @cart_items.sum { |item| item.price * session[:cart][item.id.to_s] } %>
-                    <p class="subtitle is-4 has-text-dark mt-4 has-text-right">Subtotal: $<%= subtotal %></p>
-                </div>
-                <div class="cell">
-                    <%= link_to "🡠 Continue Shopping", root_path, class: "button is-dark is-rounded is-outlined mt-6" %><% end %>
-                </div>
+                            </thead>
+                            <tbody>
+                                <% @cart_items.each do |product| %>
+                                    <% qty = session[:cart][product.id.to_s] %>
+                                    <tr>
+                                        <td style="width:125px">
+                                            <% if product.image.attached? %>
+                                                <%= image_tag product.image.variant(resize_to_limit: [125,125]), alt: product.product_name %>
+                                            <% end %>
+                                        </td>
+                                        <td class="has-text-dark">
+                                            <%= link_to product.product_name, product_path(product.category.category_name.parameterize, product.product_name.parameterize), class: "has-text-dark" %>
+                                        </td>
+                                        <td class="has-text-dark">
+                                            <%= link_to product.category.category_name, category_path(product.category.category_name.parameterize), class: "has-text-dark" %>
+                                        </td>
+                                        <td class="has-text-dark">$<%= product.price %></td>
+                                        <td>
+                                            <form action="<%= update_cart_item_path(product.id) %>" method="post" accept-charset="UTF-8">
+                                                <input type="hidden" name="_method" value="patch">
+                                                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                                                <input type="number"
+                                                    name="quantity"
+                                                    id="quantity_<%= product.id %>"
+                                                    value="<%= qty %>"
+                                                    min="1"
+                                                    class="input has-background-light has-text-dark mb-2"
+                                                    style="width:85px">
+                                                <input type="submit"
+                                                    value="Update"
+                                                    class="button is-info is-rounded ml-2">
+                                            </form>
+                                        </td>
+                                        <td class="has-text-dark">$<%= product.price * qty %></td>
+                                        <td class="has-text-right">
+                                            <form action="<%= remove_cart_item_path(product.id) %>" method="post" accept-charset="UTF-8">
+                                                <input type="hidden" name="_method" value="delete">
+                                                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                                                <input type="submit"
+                                                    value="🞪 Remove"
+                                                    class="button is-danger is-rounded">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="cell">
+                        <% subtotal = @cart_items.sum { |item| item.price * session[:cart][item.id.to_s] } %>
+                        <p class="title is-4 has-text-dark mt-4 has-text-right">Subtotal: $<%= subtotal %></p>
+                    </div>
+                    <div class="cell">
+                        <div class="mt-6" style="display: flex; justify-content: space-between; align-items: center;">
+                            <%= link_to "🡠 Continue Shopping", root_path, class: "button is-dark is-rounded is-outlined" %>
+                            <%= link_to "Proceed to Checkout 🡢", checkout_customer_path, class: "button is-dark is-rounded" %>
+                        </div>
+                    </div>
+                <% end %>
             </div>
         </div>
     </div>

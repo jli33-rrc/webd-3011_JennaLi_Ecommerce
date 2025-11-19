@@ -1,0 +1,16 @@
+<section class="section has-background-light has-text-dark">
+    <div class="container mt-6 mb-6">
+        <div class="fixed-grid has-1-cols">
+            <div class="grid">
+                <div class="cell">
+                    <h1 class="title is-1 has-text-dark mb-4">Thank you, <%= @purchase.customer.first_name %>!</h1>
+                </div>
+                <div class="cell">
+                    <p>Your purchase has been successfully completed.</p>
+                    <p class="mb-6">An email confirmation will be sent to <strong class="has-text-dark has-text-weight-bold"><%= @purchase.customer.email %></strong>.</p>
+                    <%= link_to "Continue Shopping 🡢", root_path, class: "button is-dark is-rounded is-outlined" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

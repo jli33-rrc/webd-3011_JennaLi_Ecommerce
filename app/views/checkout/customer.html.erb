@@ -1,0 +1,47 @@
+<section class="section has-background-light has-text-dark">
+  <div class="container mt-6 mb-6">
+    <div class="fixed-grid has-1-cols">
+      <div class="grid">
+        <div class="cell">
+          <p class="subtitle is-4 has-text-dark is-italic mb-2">Checkout</p>
+          <h1 class="title is-1 has-text-dark mb-4">Enter Customer Information</h1>
+        </div>
+        <div class="cell">
+          <%= form_with model: @customer, url: checkout_customer_path, method: :post, local: true do |f| %>
+            <div class="field mb-5">
+              <%= f.label :first_name, "First Name*", class: "is-uppercase has-text-weight-bold" %>
+              <%= f.text_field :first_name, class: "input has-background-light has-text-dark", required: true %>
+            </div>
+            <div class="field mb-5">
+              <%= f.label :last_name, "Last Name*", class: "is-uppercase has-text-weight-bold" %>
+              <%= f.text_field :last_name, class: "input has-background-light has-text-dark", required: true %>
+            </div>
+            <div class="field mb-5">
+              <%= f.label :email, "Email*", class: "is-uppercase has-text-weight-bold" %>
+              <%= f.email_field :email, class: "input has-background-light has-text-dark", required: true %>
+            </div>
+            <div class="field mb-5">
+              <%= f.label :address, class: "is-uppercase has-text-weight-bold" %>
+              <%= f.text_field :address, class: "input has-background-light has-text-dark" %>
+            </div>
+            <div class="field mb-5">
+              <%= f.label :city, class: "is-uppercase has-text-weight-bold" %>
+              <%= f.text_field :city, class: "input has-background-light has-text-dark" %>
+            </div>
+            <div class="field mb-5">
+              <%= f.label :postal_code, class: "is-uppercase has-text-weight-bold" %>
+              <%= f.text_field :postal_code, class: "input has-background-light has-text-dark" %>
+            </div>
+            <div class="field mb-5">
+              <%= f.label :province_id, "Province*", class: "is-uppercase has-text-weight-bold" %>
+              <%= f.collection_select :province_id, Province.all, :id, :province_name, { prompt: "Select Province" }, class: "input has-background-light has-text-dark" %>
+            </div>
+            <div class="field mt-6 has-text-right">
+              <%= f.submit "Continue to Invoice 🡢", class: "button is-dark is-rounded" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

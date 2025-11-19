@@ -1,0 +1,71 @@
+<section class="section has-background-light has-text-dark">
+    <div class="container mt-6 mb-6">
+        <div class="fixed-grid has-1-cols">
+            <div class="grid">
+                <div class="cell">
+                    <p class="subtitle is-4 has-text-dark is-italic mb-2">Checkout</p>
+                    <h1 class="title is-1 has-text-dark">Invoice</h1>
+                </div>
+                <div class="cell mb-6">
+                    <h2 class="subtitle is-4 has-text-dark mt-6">Customer Information</h2>
+                    <p><strong class="is-uppercase has-text-dark has-text-weight-bold">Name:</strong> <%= @customer.first_name %> <%= @customer.last_name %></p>
+                    <p><strong class="is-uppercase has-text-dark has-text-weight-bold">Email:</strong> <%= @customer.email %></p>
+                    <% if @customer.address.present? %>
+                        <p><strong class="is-uppercase has-text-dark has-text-weight-bold">Address:</strong> <%= @customer.address %>, <%= @customer.city %>, <%= @customer.postal_code %></p>
+                    <% end %>
+                    <p class="mb-1"><strong class="is-uppercase has-text-dark has-text-weight-bold">Province:</strong> <%= @customer.province.province_name %></p>
+                    <%= link_to "Update", checkout_customer_path, class: "button is-info is-rounded mt-5" %>
+                </div>
+                <div class="cell mt-5">
+                    <h2 class="subtitle is-4 has-text-dark">Shopping Cart</h2>
+                </div>
+                <div class="cell table-container ">
+                    <table class="table is-fullwidth has-background-light">
+                        <thead>
+                            <tr>
+                                <th class="has-text-dark is-uppercase">Image</th>
+                                <th class="has-text-dark is-uppercase">Product</th>
+                                <th class="has-text-dark is-uppercase">Category</th>
+                                <th class="has-text-dark is-uppercase">Price</th>
+                                <th class="has-text-dark is-uppercase">Quantity</th>
+                                <th class="has-text-dark is-uppercase">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @cart_items.each do |product| %>
+                                <% qty = session[:cart][product.id.to_s] %>
+                                <tr>
+                                    <td style="width:125px">
+                                        <% if product.image.attached? %>
+                                            <%= image_tag product.image.variant(resize_to_limit: [125,125]), alt: product.product_name %>
+                                        <% end %>
+                                    </td>
+                                    <td class="has-text-dark"><%= product.product_name %></td>
+                                    <td class="has-text-dark"><%= product.category.category_name %></td>
+                                    <td class="has-text-dark">$<%= product.price %></td>
+                                    <td class="has-text-dark"><%= qty %></td>
+                                    <td class="has-text-dark">$<%= (product.price * qty).round(2) %></td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cell">
+                    <p class="has-text-dark has-text-right"><strong class="has-text-dark has-text-weight-bold">SUBTOTAL:</strong> $<%= @subtotal.round(2) %></p>
+                    <p class="has-text-dark has-text-right"><strong class="has-text-dark has-text-weight-bold">GST:</strong> $<%= @gst.round(2) %></p>
+                    <p class="has-text-dark has-text-right"><strong class="has-text-dark has-text-weight-bold">PST:</strong> $<%= @pst.round(2) %></p>
+                    <p class="has-text-dark has-text-right"><strong class="has-text-dark has-text-weight-bold">HST:</strong> $<%= @hst.round(2) %></p>
+                    <p class="title is-4 has-text-dark mt-4 mb-2 has-text-right"><strong>Total:</strong> $<%= @total.round(2) %></p>
+                </div>
+                <div class="cell">
+                    <div class="mt-6" style="display: flex; justify-content: space-between; align-items: center;">
+                        <%= link_to "🡠 Edit Cart", cart_path, class: "button is-dark is-rounded is-outlined" %>
+                        <%= form_with url: checkout_confirm_path, method: :post, local: true do %>
+                            <%= submit_tag "Submit Purchase 🡢", class: "button is-dark is-rounded mt-3" %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

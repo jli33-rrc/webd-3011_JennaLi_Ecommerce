@@ -16,12 +16,15 @@ class Customer < ApplicationRecord
              format: { with: URI::MailTo::EMAIL_REGEXP }
 
   validates :address,
+             allow_blank: true,
              format: { with: /\A[a-zA-Z0-9\s#.,'-]+\z/, message: "can only contain letters, numbers, spaces, commas, periods, hyphens, apostrophes, or #" }
   
   validates :city,
+             allow_blank: true,
              format: { with: /\A[a-zA-Z\s'-]+\z/, message: "can only contain letters, spaces, apostrophes, or hyphens" }
 
   validates :postal_code,
+             allow_blank: true,
              format: { with: /\A[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z]\s?\d[ABCEGHJ-NPRSTV-Z]\d\z/i, message: "must be a valid Canadian postal code (e.g., A1A 1A1)" }
   
   validates :province_id,

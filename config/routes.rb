@@ -20,10 +20,16 @@ Rails.application.routes.draw do
 
   get "/products/search", to: "products#search", as: :search_products
 
-  get    "/cart", to: "cart#show",   as: :cart
-  post   "/cart/add/:id", to: "cart#add",    as: :add_to_cart
+  get    "/cart", to: "cart#show", as: :cart
+  post   "/cart/add/:id", to: "cart#add", as: :add_to_cart
   patch  "/cart/update/:id", to: "cart#update", as: :update_cart_item
   delete "/cart/remove/:id", to: "cart#remove", as: :remove_cart_item
+
+  get  "checkout/customer", to: "checkout#customer", as: :checkout_customer
+  post "checkout/customer", to: "checkout#save_customer"
+  get  "checkout/invoice", to: "checkout#invoice", as: :checkout_invoice
+  post "checkout/confirm", to: "checkout#confirm_purchase"
+  get  "checkout/complete/:id", to: "checkout#complete", as: :checkout_complete
 
   get '/:category_name', to: 'categories#show', as: :category
   get '/:category_name/:product_name', to: 'products#show', as: :product
